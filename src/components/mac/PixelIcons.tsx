@@ -207,6 +207,31 @@ export const PuzzleIcon = ({ size = 32 }: IconProps) =>
     size
   );
 
+/* PAINT — canvas with brush stroke */
+export const PaintIcon = ({ size = 32 }: IconProps) =>
+  wrap(
+    <>
+      <rect x="5" y="6" width="22" height="20" fill="white" stroke="black" />
+      <rect x="5" y="6" width="22" height="1" fill="black" />
+      <rect x="5" y="25" width="22" height="1" fill="black" />
+      <rect x="5" y="6" width="1" height="20" fill="black" />
+      <rect x="26" y="6" width="1" height="20" fill="black" />
+      {/* squiggle */}
+      <rect x="9" y="18" width="2" height="2" fill="black" />
+      <rect x="11" y="16" width="2" height="2" fill="black" />
+      <rect x="13" y="14" width="2" height="2" fill="black" />
+      <rect x="15" y="12" width="2" height="2" fill="black" />
+      <rect x="17" y="11" width="2" height="2" fill="black" />
+      <rect x="19" y="12" width="2" height="2" fill="black" />
+      <rect x="21" y="14" width="2" height="2" fill="black" />
+      {/* palette dots */}
+      <rect x="8" y="9" width="2" height="2" fill="black" />
+      <rect x="11" y="9" width="2" height="2" fill="black" />
+      <rect x="14" y="9" width="2" height="2" fill="black" />
+    </>,
+    size
+  );
+
 /* MAIL / CONTACT */
 export const MailIcon = ({ size = 32 }: IconProps) =>
   wrap(

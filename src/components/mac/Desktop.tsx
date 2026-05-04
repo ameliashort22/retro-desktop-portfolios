@@ -3,19 +3,21 @@ import { MenuBar, type Menu } from "@/components/mac/MenuBar";
 import { MacWindow } from "@/components/mac/MacWindow";
 import { DesktopIcon } from "@/components/mac/DesktopIcon";
 import {
-  HardDriveIcon, FolderIcon, DocIcon, TrashIcon, AppIcon,
-  CalcIcon, NoteIcon, PuzzleIcon, MailIcon, HappyMacIcon,
+  FolderIcon, DocIcon, TrashIcon, AppIcon,
+  CalcIcon, NoteIcon, PuzzleIcon, PaintIcon, MailIcon, HappyMacIcon,
 } from "@/components/mac/PixelIcons";
 import { AtlasCaseStudy, TutorialsCaseStudy } from "@/components/mac/CaseStudies";
 import { Calculator } from "@/components/mac/apps/Calculator";
 import { NotePad } from "@/components/mac/apps/NotePad";
 import { Puzzle } from "@/components/mac/apps/Puzzle";
+import { Paint } from "@/components/mac/apps/Paint";
+import { ClippyAgent } from "@/components/mac/ClippyAgent";
 
 type WinId =
   | "hd" | "about" | "readme" | "portfolio"
   | "atlas" | "tutorials" | "research"
   | "contact" | "trash"
-  | "calc" | "note" | "puzzle"
+  | "calc" | "note" | "puzzle" | "paint"
   | "aboutBox" | "alert";
 
 interface WinDef {
@@ -66,15 +68,15 @@ export function Desktop() {
       initial: { x: 60, y: 50, w: 360, h: 240 },
       content: (
         <div className="space-y-2 text-[12px]">
-          <p><strong>Welcome to Macintosh.</strong></p>
-          <p>This is Amelia Short&apos;s portfolio, dressed up as System 7.5. Double-click any icon on the desktop to open it. Drag windows by their title bar. Click the Apple to learn more about this Macintosh.</p>
-          <p>Try the menus up top — File, Edit, View, Special, Help. Open the Calculator. Solve the puzzle. Toss something in the Trash.</p>
-          <p className="italic text-platinum-dark">— The Finder, since 1994</p>
+          <p><strong>Howdy 🤠</strong></p>
+          <p>This here's my portfolio. Double-click any icon on the desktop to open it. Drag windows by their title bar. Click the fruit to learn more about this site.</p>
+          <p>Most importantly, have fun!</p>
+          <p className="italic text-platinum-dark">— Amelia Short</p>
         </div>
       ),
     },
     hd: {
-      title: "Macintosh HD",
+      title: "amelia HD",
       initial: { x: 80, y: 80, w: 480, h: 300 },
       content: (
         <div>
@@ -86,7 +88,7 @@ export function Desktop() {
             <FinderItem icon={<DocIcon size={32} />} label="About Me" onOpen={() => open("about")} />
             <FinderItem icon={<DocIcon size={32} />} label="Read Me" onOpen={() => open("readme")} />
             <FinderItem icon={<MailIcon size={32} />} label="Contact" onOpen={() => open("contact")} />
-            <FinderItem icon={<FolderIcon size={32} />} label="Apps" onOpen={() => { open("calc"); open("note"); open("puzzle"); }} />
+            <FinderItem icon={<FolderIcon size={32} />} label="Apps" onOpen={() => { open("note"); open("puzzle"); open("paint"); }} />
           </div>
         </div>
       ),
@@ -109,26 +111,35 @@ export function Desktop() {
     },
     about: {
       title: "About Me",
-      initial: { x: 460, y: 80, w: 380, h: 360 },
+      initial: { x: 460, y: 80, w: 380, h: 330 },
       content: (
         <div className="space-y-3 text-[12px]">
           <div className="flex items-start gap-3">
             <div className="bevel-in bg-white p-1"><AppIcon size={48} /></div>
             <div>
-              <div className="text-[20px] leading-none" style={{ fontFamily: "var(--font-chicago)" }}>Amelia Short</div>
+              <div className="text-[20px] leading-none">Amelia Short</div>
               <div className="italic mt-1">Product Designer</div>
             </div>
           </div>
           <hr className="border-black" />
           <p>
-            Designing at the intersection of human experience and AI-native interaction. From launching MongoDB Atlas&apos;s first code playground to leading research on how LLMs are reshaping user expectations, I translate emerging paradigms into elegant, accessible product experiences.
+            Designing at the intersection of human experience and AI-native interaction. From launching MongoDB Atlas's first code playground to leading research on how LLMs are reshaping user expectations, I translate emerging paradigms into elegant, accessible product experiences.
           </p>
-          <p className="font-bold">Currently:</p>
+          <p className="font-bold">tl;dr</p>
           <ul className="list-disc pl-5 space-y-0.5">
             <li>Product Designer @ MongoDB</li>
             <li>CHI 2025 Best Paper Award</li>
-            <li>Available for chats over coffee</li>
           </ul>
+          <div className="flex flex-wrap gap-2 pt-1">
+            <a
+              href="https://docs.google.com/document/d/1gStbf9nPtDNNmcKmM3UYgYc91Mac7uVqeIDiqgt1g_c/edit?usp=sharing"
+              target="_blank"
+              rel="noreferrer"
+              className="bevel-button px-3 py-1"
+            >
+              Résumé
+            </a>
+          </div>
         </div>
       ),
     },
@@ -149,7 +160,7 @@ export function Desktop() {
       initial: { x: 120, y: 80, w: 640, h: 460 },
       zoomable: true, caseStudy: true,
       content: (
-        <article style={{ fontFamily: "var(--font-chicago)" }}>
+        <article>
           <h1 className="text-[32px] leading-tight mb-1">Tracking and its potential for older adults with memory concerns</h1>
           <p className="italic text-platinum-dark mb-4">Short et al. · CHI 2025 · 🏆 Best Paper Award</p>
 
@@ -161,20 +172,11 @@ export function Desktop() {
 
           <h2 className="text-[18px] mb-2 pb-1 border-b-2 border-black">Abstract</h2>
           <p className="text-[13px] leading-relaxed">
-            A qualitative study exploring how self-tracking technologies can support — without surveilling — older adults navigating cognitive change. We conducted in-depth interviews with older adults experiencing memory concerns and their care partners, examining how tracking tools intersect with autonomy, dignity, and the lived experience of aging.
-          </p>
-
-          <h2 className="text-[18px] mt-6 mb-2 pb-1 border-b-2 border-black">Contributions</h2>
-          <ul className="list-disc pl-6 space-y-1 text-[13px]">
-            <li>A typology of how older adults appropriate (and resist) tracking technologies.</li>
-            <li>Design implications for memory-aware technologies that center user agency.</li>
-            <li>A critical examination of how surveillance creeps into "supportive" tools.</li>
-          </ul>
+          Much research on older people with memory concerns is focused on tracking and informed by the priorities of others. In this paper, we seek to understand the potential that people with memory concerns see in tracking. We conducted interviews with 29 participants with concerns about their memory and engaged in an affective writing approach. We find a range of potentials that can be traced to how participants are already self-tracking. Emotions associated with these potentials vary: from acceptance to resistance, and positive anticipation to aversion. Participants are emotionally motivated to foreclose possibilities in some instances and keep them open in others. While individual and unique, potential is structured by forces that include individual routines, relationships with others, and macro-level institutions and cultural contexts. We reflect on these findings in the context of research on self-tracking with older adults, designing with ambiguity, and forces that structure the experience of living with memory concerns.          </p>
 
           <h2 className="text-[18px] mt-6 mb-2 pb-1 border-b-2 border-black">Why this matters</h2>
           <p className="text-[13px] leading-relaxed">
-            As populations age and AI-mediated tools proliferate, the design choices we make today will shape the texture of millions of older adults&apos; lives. This work argues that the loudest design question is not "what can we measure?" but "what should we honor?"
-          </p>
+          Most technology for people with memory concerns is designed for caregivers and doctors, leaving the person with memory loss in a passive role. This paper interviewed 29 older adults and found they're already actively self-tracking in meaningful ways — counting birds, following the news, setting alarms to stay accountable to others. Crucially, people don't always want ambiguity resolved: sometimes avoiding a definitive answer (like a dementia label or a number on a scale) is emotionally necessary, not a design flaw. The takeaway for designers is that building for this population without involving them produces tools that miss the point entirely, or cause harm.          </p>
 
           <div className="mt-8">
             <a href="https://dl.acm.org/doi/10.1145/3706598.3714093" target="_blank" rel="noreferrer"
@@ -185,18 +187,17 @@ export function Desktop() {
     },
     contact: {
       title: "Contact",
-      initial: { x: 380, y: 240, w: 320, h: 260 },
+      initial: { x: 380, y: 240, w: 320, h: 200 },
       content: (
         <div className="space-y-3 text-[12px]">
           <p>Drop a line, send a pigeon, or copy my email below.</p>
-          <div className="bevel-in bg-white px-2 py-1" style={{ fontFamily: "var(--font-mono)" }}>hello@ameliashort.design</div>
+          <div className="bevel-in bg-white px-2 py-1">ameliashort331@yahoo.com</div>
           <button onClick={copyEmail} className="bevel-button px-3 py-1">
             {emailCopied ? "Copied!" : "Copy Email"}
           </button>
           <hr className="border-black" />
           <div className="flex flex-wrap gap-2">
             <a href="https://www.linkedin.com/in/amelia-short/" target="_blank" rel="noreferrer" className="bevel-button px-3 py-1">LinkedIn</a>
-            <a href="https://docs.google.com/document/d/1Cz_dRMRqZUCzDvFA4jcsodhksW97vlSKt8vFAplIUfs/edit" target="_blank" rel="noreferrer" className="bevel-button px-3 py-1">Résumé</a>
           </div>
         </div>
       ),
@@ -207,19 +208,21 @@ export function Desktop() {
       content: (
         <div>
           <div className="border-b border-black pb-1 mb-2 text-[11px] flex justify-between">
-            <span>{trashFull ? "1 item" : "Empty"}</span><span>—</span>
+            <span>{trashFull ? "2 items" : "Empty"}</span><span>—</span>
           </div>
           {trashFull ? (
             <>
-              <div className="grid grid-cols-4 gap-3 p-2">
-                <FinderItem icon={<DocIcon size={32} />} label="generic-template.psd" onOpen={() => showAlert("Cannot open file", "“generic-template.psd” is in the Trash.\nPlease drag it out of the Trash before opening.")} />
+              <div className="grid grid-cols-4 gap-x-36 gap-y-3 p-2">
+                <FinderItem icon={<DocIcon size={32} />} label={"alarm_that_\nsnoozes_itself.fig"} onOpen={() => showAlert("Cannot open file", "“alarm_that_snoozes_itself.fig” is in the Trash.\nFor obvious reasons.")} />
+                <FinderItem icon={<DocIcon size={32} />} label={"ai_therapist_\nthat_takes_sides.doc"} onOpen={() => showAlert("Cannot open file", "“ai_therapist_that_takes_sides.doc” is in the Trash.\nWhere it belongs.")} />
               </div>
+              
               <div className="mt-3 px-2">
                 <button onClick={() => setTrashFull(false)} className="bevel-button px-3 py-1">Empty Trash…</button>
               </div>
             </>
           ) : (
-            <p className="p-2 italic">The Trash is empty. (Generic portfolio templates have been thoroughly disposed of.)</p>
+            <p className="p-2 italic">The Trash is empty. (All bad ideas have been thoroughly disposed of.)</p>
           )}
         </div>
       ),
@@ -239,16 +242,21 @@ export function Desktop() {
       initial: { x: 600, y: 80, w: 240, h: 280 },
       content: <Puzzle />,
     },
+    paint: {
+      title: "Doodle It",
+      initial: { x: 400, y: 100, w: 480, h: 380 },
+      content: <Paint />,
+    },
     aboutBox: {
-      title: "About This Macintosh",
+      title: "About This Site",
       initial: { x: 0, y: 0, w: 420, h: 240 },
       content: (
         <div className="text-[12px]">
           <div className="flex items-start gap-3">
             <div className="bevel-in bg-white p-1"><HappyMacIcon size={48} /></div>
             <div>
-              <div className="text-[16px]" style={{ fontFamily: "var(--font-chicago)" }}>System Software 7.5</div>
-              <div className="italic">© Amelia Short, 1994–{new Date().getFullYear()}</div>
+              <div className="text-[16px]">Product Designer Portfolio</div>
+              <div className="italic">© Amelia Short, {new Date().getFullYear()}</div>
               <div className="mt-1">Built-in memory: 8,192K</div>
               <div>Largest unused block: just enough for one really good idea.</div>
             </div>
@@ -257,7 +265,7 @@ export function Desktop() {
           <div className="bevel-in bg-white p-2">
             <div>Finder ········· 1.0</div>
             <div>Portfolio ······ ∞</div>
-            <div>Sense of humor · 100%</div>
+            <div>Sense of whimsy · 100%</div>
           </div>
         </div>
       ),
@@ -270,7 +278,7 @@ export function Desktop() {
           <div className="bevel-in bg-white p-1 shrink-0"><AppIcon size={32} /></div>
           <div className="flex-1">
             <div className="font-bold mb-1">{alert?.title}</div>
-            <pre className="whitespace-pre-wrap" style={{ fontFamily: "var(--font-chicago)" }}>{alert?.body}</pre>
+            <pre className="whitespace-pre-wrap">{alert?.body}</pre>
             <div className="mt-3 text-right">
               <button onClick={() => close("alert")} className="bevel-button px-4 py-1" style={{ boxShadow: "inset 1px 1px 0 white, inset -1px -1px 0 var(--platinum-dark), 0 0 0 2px black" }}>OK</button>
             </div>
@@ -290,11 +298,11 @@ export function Desktop() {
     {
       label: "", isApple: true,
       items: [
-        { label: "About This Macintosh…", onClick: () => open("aboutBox") },
+        { label: "About This Site...", onClick: () => open("aboutBox") },
         { label: "", divider: true },
-        { label: "Calculator", onClick: () => open("calc") },
         { label: "Note Pad", onClick: () => open("note") },
         { label: "Puzzle", onClick: () => open("puzzle") },
+        { label: "Doodle It", onClick: () => open("paint") },
         { label: "", divider: true },
         { label: "Chooser", disabled: true },
         { label: "Control Panels", disabled: true },
@@ -314,7 +322,7 @@ export function Desktop() {
         { label: "Make Alias", disabled: true, shortcut: "⌘M" },
         { label: "Put Away", disabled: true, shortcut: "⌘Y" },
         { label: "", divider: true },
-        { label: "Find…", shortcut: "⌘F", onClick: () => showAlert("Find", "Try double-clicking a folder. They&apos;re right there.") },
+        { label: "Find…", shortcut: "⌘F", onClick: () => showAlert("Find", "Try double-clicking a folder. They're right there.") },
         { label: "Find Again", shortcut: "⌘G", disabled: true },
         { label: "", divider: true },
         { label: "Page Setup…", disabled: true },
@@ -360,7 +368,7 @@ export function Desktop() {
         { label: "Erase Disk…", disabled: true },
         { label: "", divider: true },
         { label: "Restart", onClick: () => location.reload() },
-        { label: "Shut Down", onClick: () => showAlert("Shut Down", "It is now safe to turn off your computer.\n\n(But maybe stick around — there&apos;s more to see.)") },
+        { label: "Shut Down", onClick: () => showAlert("Shut Down", "It is now safe to turn off your computer.\n\n(But maybe stick around — there's more to see.)") },
       ],
     },
     {
@@ -369,25 +377,26 @@ export function Desktop() {
         { label: "About Balloon Help…", onClick: () => showAlert("Balloon Help", "Hover lovingly. Click curiously. Drag windows by their title bars. Double-click icons. The 1990s are very forgiving.") },
         { label: "Show Balloons", disabled: true },
         { label: "", divider: true },
-        { label: "Macintosh Guide", onClick: () => open("readme") },
+        { label: "Guide", onClick: () => open("readme") },
         { label: "Shortcuts", onClick: () => showAlert("Shortcuts", "⌘O — Open\n⌘W — Close\n⌘P — Print\n⌘F — Find\nDouble-click a title bar — Zoom\nDouble-click a folder — Open\n\nGo on, try one.") },
       ],
     },
   ];
 
   const desktopIcons: { id: WinId; icon: ReactNode; label: string; pos: React.CSSProperties }[] = [
-    { id: "hd", icon: <HardDriveIcon size={32} />, label: "Macintosh HD", pos: { right: 20, top: 32 } },
+    { id: "readme", icon: <DocIcon size={32} />, label: "Read Me", pos: { right: 20, top: 32 } },
     { id: "portfolio", icon: <FolderIcon size={32} />, label: "Portfolio", pos: { right: 20, top: 110 } },
     { id: "about", icon: <DocIcon size={32} />, label: "About Me", pos: { right: 20, top: 188 } },
     { id: "contact", icon: <MailIcon size={32} />, label: "Contact", pos: { right: 20, top: 266 } },
-    { id: "calc", icon: <CalcIcon size={32} />, label: "Calculator", pos: { right: 20, top: 344 } },
-    { id: "note", icon: <NoteIcon size={32} />, label: "Note Pad", pos: { right: 20, top: 422 } },
-    { id: "puzzle", icon: <PuzzleIcon size={32} />, label: "Puzzle", pos: { right: 20, top: 500 } },
+    { id: "note", icon: <NoteIcon size={32} />, label: "Note Pad", pos: { right: 20, top: 344 } },
+    { id: "puzzle", icon: <PuzzleIcon size={32} />, label: "Puzzle", pos: { right: 20, top: 422 } },
+    { id: "paint", icon: <PaintIcon size={32} />, label: "Doodle It", pos: { right: 20, top: 500 } },
   ];
 
   return (
     <div className="relative w-screen h-screen overflow-hidden" style={{ background: "var(--desktop)" }}>
       <MenuBar menus={menus} />
+      <ClippyAgent />
 
       {/* Desktop dotted/stippled pattern */}
       <div
@@ -468,7 +477,7 @@ function FinderItem({ icon, label, onOpen }: { icon: ReactNode; label: string; o
         {icon}
       </div>
       <div
-        className="text-[12px] leading-tight px-1 text-center"
+        className="text-[12px] leading-tight px-1 text-center whitespace-pre-line"
         style={{
           color: sel ? "white" : "black",
           background: sel ? "black" : "transparent",

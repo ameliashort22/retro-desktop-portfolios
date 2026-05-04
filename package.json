@@ -46,6 +46,7 @@
     "@tanstack/react-start": "^1.167.14",
     "@tanstack/router-plugin": "^1.167.10",
     "class-variance-authority": "^0.7.1",
+    "clippyjs": "^0.1.0",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
     "date-fns": "^4.1.0",

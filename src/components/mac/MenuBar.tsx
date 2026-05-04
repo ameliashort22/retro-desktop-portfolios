@@ -65,7 +65,6 @@ export function MenuBar({ menus }: MenuBarProps) {
               className={`h-full px-3 flex items-center leading-none ${
                 isOpen ? "bg-black text-white" : "hover:bg-black hover:text-white"
               }`}
-              style={{ fontFamily: "var(--font-chicago)" }}
             >
               {menu.isApple ? <AppleIcon size={14} /> : menu.label}
             </button>
@@ -107,7 +106,7 @@ export function MenuBar({ menus }: MenuBarProps) {
           </div>
         );
       })}
-      <div className="ml-auto px-3" style={{ fontFamily: "var(--font-chicago)" }}>{time}</div>
+      <div className="ml-auto px-3">{time}</div>
     </div>
   );
 }

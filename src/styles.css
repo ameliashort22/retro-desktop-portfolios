@@ -1,6 +1,4 @@
-@import url("https://fonts.cdnfonts.com/css/chicago");
-@import url("https://fonts.cdnfonts.com/css/monaco");
-
+@import url("https://fonts.googleapis.com/css2?family=Jersey+25&display=swap");
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
@@ -26,15 +24,16 @@
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
   --color-ring: var(--ring);
-  --font-chicago: "Chicago", "ChicagoFLF", "Geneva", -apple-system, system-ui, sans-serif;
-  --font-mono: "Monaco", "Andale Mono", "Courier New", monospace;
+  --font-sans: "Jersey 25", ui-sans-serif, sans-serif;
+  --font-mono: "Jersey 25", ui-monospace, monospace;
+  --font-chicago: "Jersey 25", sans-serif;
 }
 
 :root {
   --radius: 0;
 
   /* B&W System 7.5 palette */
-  --desktop: oklch(0.86 0 0);
+  --desktop: oklch(0.7706 0.0337 219.43);
   --desktop-pattern: oklch(0.74 0 0);
   --platinum: oklch(0.86 0 0);          /* B&W System 7 chrome */
   --platinum-light: oklch(1 0 0);
@@ -61,10 +60,16 @@
 @layer base {
   * { border-color: var(--color-border); }
   html, body, #root { height: 100%; }
+  html {
+    font-family: "Jersey 25", sans-serif;
+  }
+  button, input, textarea, select, pre, code, kbd, samp {
+    font-family: inherit;
+  }
   body {
     background-color: var(--color-desktop);
     color: var(--color-foreground);
-    font-family: var(--font-chicago);
+    font-family: "Jersey 25", sans-serif;
     font-size: 12px;
     line-height: 1.35;
     overflow: hidden;
