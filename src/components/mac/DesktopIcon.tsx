@@ -1,35 +1,44 @@
-import type { ReactNode } from "react";
+import type { ReactNode, CSSProperties } from "react";
+import { useState } from "react";
 
 interface DesktopIconProps {
   label: string;
-  emoji: string;
+  icon: ReactNode;
   onOpen: () => void;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }
 
-export function DesktopIcon({ label, emoji, onOpen, style }: DesktopIconProps) {
+export function DesktopIcon({ label, icon, onOpen, style }: DesktopIconProps) {
+  const [selected, setSelected] = useState(false);
   return (
     <button
-      onDoubleClick={onOpen}
-      onClick={onOpen}
-      className="absolute flex flex-col items-center w-20 gap-1 text-platinum-light focus:outline-none group"
+      onClick={(e) => {
+        e.stopPropagation();
+        setSelected(true);
+      }}
+      onDoubleClick={() => { setSelected(false); onOpen(); }}
+      onBlur={() => setSelected(false)}
+      className="absolute flex flex-col items-center w-20 gap-[2px] focus:outline-none"
       style={style}
     >
-      <div className="text-4xl leading-none drop-shadow-[1px_1px_0_rgba(0,0,0,0.6)] group-hover:scale-110 transition-transform">
-        {emoji}
+      <div
+        className="w-8 h-8 flex items-center justify-center"
+        style={{ filter: selected ? "invert(1)" : undefined }}
+      >
+        {icon}
       </div>
-      <div className="text-[11px] font-bold px-1 leading-tight text-center"
-           style={{ background: "transparent", color: "white", textShadow: "1px 1px 0 black" }}>
+      <div
+        className="text-[12px] leading-tight px-1 text-center"
+        style={{
+          fontFamily: "var(--font-chicago)",
+          color: selected ? "white" : "black",
+          background: selected ? "black" : "white",
+          padding: "0 2px",
+          maxWidth: 78,
+        }}
+      >
         {label}
       </div>
-    </button>
-  );
-}
-
-export function DesktopIconWithChildren({ children, onOpen, style }: { children: ReactNode; onOpen: () => void; style?: React.CSSProperties }) {
-  return (
-    <button onDoubleClick={onOpen} onClick={onOpen} className="absolute" style={style}>
-      {children}
     </button>
   );
 }
