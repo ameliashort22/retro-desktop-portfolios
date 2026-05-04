@@ -1,3 +1,6 @@
+@import url("https://fonts.cdnfonts.com/css/chicago");
+@import url("https://fonts.cdnfonts.com/css/monaco");
+
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
@@ -11,12 +14,9 @@
   --color-platinum: var(--platinum);
   --color-platinum-dark: var(--platinum-dark);
   --color-platinum-light: var(--platinum-light);
-  --color-titlebar: var(--titlebar);
   --color-titlebar-stripe: var(--titlebar-stripe);
   --color-accent-blue: var(--accent-blue);
   --color-accent-red: var(--accent-red);
-  --color-accent-yellow: var(--accent-yellow);
-  --color-accent-green: var(--accent-green);
   --color-shadow: var(--shadow-color);
   --color-border: var(--border);
   --color-primary: var(--primary);
@@ -26,107 +26,117 @@
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
   --color-ring: var(--ring);
-  --font-chicago: "ChicagoFLF", "Geneva", system-ui, sans-serif;
-  --font-geneva: "Geneva", "Verdana", sans-serif;
+  --font-chicago: "Chicago", "ChicagoFLF", "Geneva", -apple-system, system-ui, sans-serif;
+  --font-mono: "Monaco", "Andale Mono", "Courier New", monospace;
 }
 
 :root {
   --radius: 0;
 
-  /* Classic Mac OS 8 platinum palette */
-  --desktop: oklch(0.74 0.06 280);            /* lavender desktop */
-  --platinum: oklch(0.86 0.005 270);          /* window chrome */
-  --platinum-light: oklch(0.96 0.003 270);
-  --platinum-dark: oklch(0.55 0.01 270);
+  /* B&W System 7.5 palette */
+  --desktop: oklch(0.86 0 0);
+  --desktop-pattern: oklch(0.74 0 0);
+  --platinum: oklch(0.86 0 0);          /* B&W System 7 chrome */
+  --platinum-light: oklch(1 0 0);
+  --platinum-dark: oklch(0.55 0 0);
+  --titlebar-stripe: oklch(0.2 0 0);
 
-  --titlebar: oklch(0.96 0.003 270);
-  --titlebar-stripe: oklch(0.55 0.01 270);
-
-  --accent-blue: oklch(0.55 0.18 260);
-  --accent-red: oklch(0.62 0.22 25);
-  --accent-yellow: oklch(0.85 0.17 90);
-  --accent-green: oklch(0.7 0.18 145);
+  --accent-blue: oklch(0.45 0.18 260);
+  --accent-red: oklch(0.55 0.22 25);
 
   --shadow-color: oklch(0 0 0 / 0.5);
 
   --background: var(--desktop);
-  --foreground: oklch(0.15 0 0);
-  --card: var(--platinum);
-  --card-foreground: oklch(0.15 0 0);
-  --primary: oklch(0.15 0 0);
-  --primary-foreground: var(--platinum-light);
+  --foreground: oklch(0.05 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.05 0 0);
+  --primary: oklch(0.05 0 0);
+  --primary-foreground: oklch(1 0 0);
   --muted: var(--platinum);
-  --muted-foreground: oklch(0.4 0.01 270);
-  --border: oklch(0.15 0 0);
-  --ring: var(--accent-blue);
+  --muted-foreground: oklch(0.35 0 0);
+  --border: oklch(0 0 0);
+  --ring: oklch(0 0 0);
 }
 
 @layer base {
-  * {
-    border-color: var(--color-border);
-  }
-  html, body, #root {
-    height: 100%;
-  }
+  * { border-color: var(--color-border); }
+  html, body, #root { height: 100%; }
   body {
     background-color: var(--color-desktop);
     color: var(--color-foreground);
     font-family: var(--font-chicago);
     font-size: 12px;
+    line-height: 1.35;
     overflow: hidden;
-    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='22' viewBox='0 0 16 22'><path d='M1 1 L1 16 L5 12 L7.5 18 L9.5 17 L7 11 L13 11 Z' fill='black' stroke='white' stroke-width='1' stroke-linejoin='miter'/></svg>") 1 1, default;
+    -webkit-font-smoothing: none;
+    font-smooth: never;
+    image-rendering: pixelated;
+    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='22' viewBox='0 0 16 22' shape-rendering='crispEdges'><path d='M1,1 L1,15 L4,12 L6,17 L8,16 L6,11 L11,11 Z' fill='black'/><path d='M2,3 L2,13 L4,11 L6,15 L7,15 L5,10 L9,10 Z' fill='white'/></svg>") 1 1, default;
   }
-  /* Pixelated bevel utilities */
+  button, a { cursor: inherit; }
+
+  /* Crisp 1px b&w bevels */
   .bevel-out {
+    background: var(--platinum);
     box-shadow:
-      inset 1px 1px 0 0 var(--platinum-light),
-      inset -1px -1px 0 0 var(--platinum-dark),
+      inset 1px 1px 0 0 white,
+      inset -1px -1px 0 0 black,
       inset 2px 2px 0 0 var(--platinum),
-      inset -2px -2px 0 0 oklch(0.7 0.01 270),
-      0 0 0 1px black;
+      inset -2px -2px 0 0 var(--platinum-dark);
+    border: 1px solid black;
   }
   .bevel-in {
-    box-shadow:
-      inset 1px 1px 0 0 var(--platinum-dark),
-      inset -1px -1px 0 0 var(--platinum-light),
-      0 0 0 1px black;
+    background: white;
+    border: 1px solid black;
+    box-shadow: inset 1px 1px 0 0 var(--platinum-dark);
   }
   .bevel-button {
-    box-shadow:
-      inset 1px 1px 0 0 var(--platinum-light),
-      inset -1px -1px 0 0 var(--platinum-dark),
-      0 0 0 1px black;
+    background: var(--platinum);
+    border: 1px solid black;
+    box-shadow: inset 1px 1px 0 0 white, inset -1px -1px 0 0 var(--platinum-dark);
   }
   .bevel-button:active {
-    box-shadow:
-      inset -1px -1px 0 0 var(--platinum-light),
-      inset 1px 1px 0 0 var(--platinum-dark),
-      0 0 0 1px black;
+    background: var(--platinum-dark);
+    box-shadow: inset 1px 1px 0 0 black, inset -1px -1px 0 0 white;
+    color: white;
   }
-  .pixel-shadow {
-    box-shadow: 2px 2px 0 0 rgba(0,0,0,0.35);
-  }
+  .pixel-shadow { box-shadow: 2px 2px 0 0 black; }
+  .pixel-shadow-lg { box-shadow: 3px 3px 0 0 black; }
 }
 
-/* Title bar pinstripes (active window) */
+/* Title bar pinstripes (active window) — 6 horizontal black lines */
 .titlebar-active {
   background-image: repeating-linear-gradient(
     to bottom,
-    var(--titlebar) 0px,
-    var(--titlebar) 1px,
-    var(--titlebar-stripe) 1px,
-    var(--titlebar-stripe) 2px
+    transparent 0 1px,
+    black 1px 2px
   );
+  background-color: white;
 }
 
-@keyframes float-icon {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-3px); }
+/* Desktop pattern — classic 50% gray dither */
+.desktop-pattern {
+  background-color: white;
+  background-image:
+    linear-gradient(45deg, black 25%, transparent 25%),
+    linear-gradient(-45deg, black 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, black 75%),
+    linear-gradient(-45deg, transparent 75%, black 75%);
+  background-size: 2px 2px;
+  background-position: 0 0, 0 1px, 1px -1px, -1px 0;
+  /* simpler: just stipple */
 }
-.animate-float { animation: float-icon 3s ease-in-out infinite; }
+.desktop-stipple {
+  background-color: var(--desktop);
+  background-image:
+    radial-gradient(circle at 0 0, black 0.5px, transparent 0.6px),
+    radial-gradient(circle at 1px 1px, black 0.5px, transparent 0.6px);
+  background-size: 2px 2px;
+}
 
-@keyframes blink {
-  0%, 50% { opacity: 1; }
-  51%, 100% { opacity: 0; }
+/* Selection highlight (inverted) */
+.selected-invert { background: black; color: white; }
+
+@keyframes marching-ants {
+  to { background-position: 8px 0, -8px 0, 0 8px, 0 -8px; }
 }
-.animate-blink { animation: blink 1s steps(1) infinite; }
